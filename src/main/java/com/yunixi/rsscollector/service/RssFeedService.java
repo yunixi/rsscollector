@@ -30,10 +30,12 @@ public class RssFeedService {
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed syndFeed = input.build(source);
 
-            List res = syndFeed.getEntries();
-//            for(Object o : res) {
-//                System.out.println(((SyndEntryImpl) o).getDescription().getValue());
-//            }
+            SyndFeedInputCustom inputCustom = new SyndFeedInputCustom();
+            SyndFeed syndFeed1 = inputCustom.build(source);
+
+
+            //syndFeed.getTitle()
+//            syndFeed.getDescription();
 
             for(SyndEntry feed : syndFeed.getEntries()) {
                 RssFeedVO rssFeedVO = new RssFeedVO();
@@ -41,6 +43,10 @@ public class RssFeedService {
                 rssFeedVO.setTitle(feed.getTitle());
                 rssFeedVO.setDescription(feed.getDescription().getValue());
                 Module module = ((SyndEntryImpl) feed).getModules().get(0);
+
+                System.out.println(((DCModuleImpl) syndFeed.getEntries().get(0).getModules().get(0)).getDate());
+                System.out.println(((DCModuleImpl) syndFeed.getEntries().get(0).getModules().get(0)).getDates());
+                System.out.println("======");
 
 //                rssFeedVO.setDate(((SyndEntryImpl) feed).getModules().get(0).toString());
                 rssfeedList.add(rssFeedVO);
